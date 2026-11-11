@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101010">
+  <meta name="theme-color" content="#11141b">
   <title>STANDOFF 2 CASES</title>
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -12,8 +12,10 @@
 
 <header class="header">
   <div class="logo">S2 <span>CASES</span></div>
+
   <div class="balance">
-    🟡 <span id="balance">1000</span>
+    <span class="gold-icon">◆</span>
+    <span id="balance">1000</span>
     <span class="gold">GOLD</span>
   </div>
 </header>
@@ -25,55 +27,114 @@
 </nav>
 
 <main>
+
+  <!-- Главная страница -->
   <section id="casesPage" class="page active">
+
+    <!-- Главный баннер -->
     <div class="hero">
-      <div class="hero-label">CASE OPENING</div>
-      <h1>STANDOFF <span>2</span></h1>
-      <p>Открывай кейсы и получай редкие скины!</p>
+      <div class="hero-content">
+        <div class="hero-label">STANDOFF 2 CASES</div>
+        <h1>ОТКРЫВАЙ <span>КЕЙСЫ</span></h1>
+        <p>Испытай удачу и получи редкие скины!</p>
+        <div class="hero-tag">НОВЫЕ КЕЙСЫ · РЕДКИЕ ПРЕДМЕТЫ</div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-glow"></div>
+        <div class="hero-symbol">S2</div>
+      </div>
     </div>
 
+    <!-- Кейсы -->
+    <div class="cases-heading">
+      <div>
+        <div class="section-title">ВЫБИРАЙ СВОЙ КЕЙС</div>
+        <p>Открывай и собирай коллекцию</p>
+      </div>
+      <div class="heading-decoration">CASES</div>
+    </div>
+
+    <div class="cases-grid" id="casesGrid"></div>
+
+    <!-- Открытие кейса -->
+    <div class="open-area">
+      <div class="open-area-label">ТВОЙ ВЫБОР</div>
+      <div id="selectedCaseName">Выбери кейс</div>
+      <div id="selectedCasePrice">Стоимость: 0 Gold</div>
+
+      <button id="openButton" class="open-button">
+        ОТКРЫТЬ КЕЙС
+      </button>
+
+      <div class="small-info">
+        Виртуальные предметы и Gold
+      </div>
+    </div>
+
+    <!-- Рулетка -->
     <div class="roulette-section">
       <div class="section-title">РУЛЕТКА</div>
+      <p class="section-description">
+        Посмотри, какой скин тебе выпадет
+      </p>
+
       <div class="roulette">
         <div class="center-marker"></div>
         <div class="roulette-window">
           <div class="roulette-track" id="rouletteTrack"></div>
         </div>
       </div>
+
       <div id="result" class="result">
         ВЫБЕРИ КЕЙС И НАЖМИ ОТКРЫТЬ
       </div>
     </div>
 
-    <div class="section-title">ВЫБЕРИ КЕЙС</div>
-    <div class="cases-grid" id="casesGrid"></div>
-
-    <div class="open-area">
-      <div id="selectedCaseName">Выбери кейс</div>
-      <div id="selectedCasePrice">Стоимость: 0 Gold</div>
-      <button id="openButton" class="open-button">
-        ОТКРЫТЬ КЕЙС
-      </button>
-      <div class="small-info">Виртуальные предметы и Gold</div>
+    <!-- Коллекция -->
+    <div class="collection-heading">
+      <div class="section-title">КОЛЛЕКЦИЯ СКИНОВ</div>
+      <p>Предметы, которые могут выпасть из кейсов</p>
     </div>
+
+    <div class="collection-grid" id="collectionGrid"></div>
+
   </section>
 
+  <!-- Инвентарь -->
   <section id="inventoryPage" class="page">
-    <div class="section-title">МОЙ ИНВЕНТАРЬ</div>
-    <div class="inventory-balance">
-      Баланс: <span id="inventoryGold">1000</span> Gold
+
+    <div class="page-banner">
+      <div class="section-title">МОЙ ИНВЕНТАРЬ</div>
+      <p>Твоя коллекция выигранных предметов</p>
     </div>
+
+    <div class="inventory-balance">
+      <span>◆</span>
+      Баланс:
+      <strong id="inventoryGold">1000</strong>
+      Gold
+    </div>
+
     <div id="inventoryGrid" class="items-grid"></div>
+
   </section>
 
+  <!-- История -->
   <section id="historyPage" class="page">
-    <div class="section-title">ИСТОРИЯ ОТКРЫТИЙ</div>
+
+    <div class="page-banner">
+      <div class="section-title">ИСТОРИЯ ОТКРЫТИЙ</div>
+      <p>Все твои последние выигрыши</p>
+    </div>
+
     <div id="historyList" class="history-list"></div>
+
   </section>
+
 </main>
 
 <footer>
-  <div class="footer-logo">S2 CASES</div>
+  <div class="footer-logo">S2 <span>CASES</span></div>
   <p>Независимый фанатский симулятор открытия кейсов.</p>
   <p>Не связан с официальной игрой Standoff 2.</p>
 </footer>
