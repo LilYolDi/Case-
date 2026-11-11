@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <title>STANDOFF 2 CASES</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">S2 <span>CASES</span></div>
+  <div class="balance">
+    🟡 <span id="balance">1000</span>
+    <span class="gold">GOLD</span>
+  </div>
+</header>
+
+<nav class="navigation">
+  <button class="nav-btn active" data-page="cases">КЕЙСЫ</button>
+  <button class="nav-btn" data-page="inventory">ИНВЕНТАРЬ</button>
+  <button class="nav-btn" data-page="history">ИСТОРИЯ</button>
+</nav>
+
+<main>
+  <section id="casesPage" class="page active">
+    <div class="hero">
+      <div class="hero-label">CASE OPENING</div>
+      <h1>STANDOFF <span>2</span></h1>
+      <p>Открывай кейсы и получай редкие скины!</p>
+    </div>
+
+    <div class="roulette-section">
+      <div class="section-title">РУЛЕТКА</div>
+      <div class="roulette">
+        <div class="center-marker"></div>
+        <div class="roulette-window">
+          <div class="roulette-track" id="rouletteTrack"></div>
+        </div>
+      </div>
+      <div id="result" class="result">
+        ВЫБЕРИ КЕЙС И НАЖМИ ОТКРЫТЬ
+      </div>
+    </div>
+
+    <div class="section-title">ВЫБЕРИ КЕЙС</div>
+    <div class="cases-grid" id="casesGrid"></div>
+
+    <div class="open-area">
+      <div id="selectedCaseName">Выбери кейс</div>
+      <div id="selectedCasePrice">Стоимость: 0 Gold</div>
+      <button id="openButton" class="open-button">
+        ОТКРЫТЬ КЕЙС
+      </button>
+      <div class="small-info">Виртуальные предметы и Gold</div>
+    </div>
+  </section>
+
+  <section id="inventoryPage" class="page">
+    <div class="section-title">МОЙ ИНВЕНТАРЬ</div>
+    <div class="inventory-balance">
+      Баланс: <span id="inventoryGold">1000</span> Gold
+    </div>
+    <div id="inventoryGrid" class="items-grid"></div>
+  </section>
+
+  <section id="historyPage" class="page">
+    <div class="section-title">ИСТОРИЯ ОТКРЫТИЙ</div>
+    <div id="historyList" class="history-list"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-logo">S2 CASES</div>
+  <p>Независимый фанатский симулятор открытия кейсов.</p>
+  <p>Не связан с официальной игрой Standoff 2.</p>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
