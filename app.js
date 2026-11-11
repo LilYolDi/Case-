@@ -9,11 +9,11 @@ const cases = [
     price: 100,
     skins: [
       {name:"G22 Carbon",icon:"🔫",rarity:"common",price:25,weight:35},
-      {name:"USP Pixel",icon:"🔫",rarity:"common",price:35,weight:30},
-      {name:"MP5 Storm",icon:"🔫",rarity:"rare",price:75,weight:18},
-      {name:"AKR Neon",icon:"🔫",rarity:"rare",price:120,weight:10},
+      {name:"USP Chameleon",icon:"🔫",rarity:"common",price:35,weight:30},
+      {name:"MP5 Northern Fury",icon:"🔫",rarity:"rare",price:75,weight:18},
+      {name:"AKR Scale",icon:"🔫",rarity:"rare",price:120,weight:10},
       {name:"AWM Dragon",icon:"🎯",rarity:"epic",price:250,weight:5},
-      {name:"Knife Gold",icon:"🔪",rarity:"legendary",price:600,weight:2}
+      {name:"Butterfly Cold Flame",icon:"🔪",rarity:"legendary",price:600,weight:2}
     ]
   },
   {
@@ -22,12 +22,12 @@ const cases = [
     icon: "🎁",
     price: 250,
     skins: [
-      {name:"P350 Forest",icon:"🔫",rarity:"common",price:50,weight:25},
-      {name:"F/S Poison",icon:"🔫",rarity:"rare",price:120,weight:25},
-      {name:"AKR Treasure",icon:"🔫",rarity:"rare",price:200,weight:20},
-      {name:"M4 Night",icon:"🔫",rarity:"epic",price:350,weight:15},
-      {name:"AWM Genesis",icon:"🎯",rarity:"epic",price:550,weight:10},
-      {name:"Knife Ruby",icon:"🔪",rarity:"legendary",price:1200,weight:5}
+      {name:"P350 Forest Spirit",icon:"🔫",rarity:"common",price:50,weight:25},
+      {name:"Tec9 Aurora",icon:"🔫",rarity:"rare",price:120,weight:25},
+      {name:"AKR Treasure Hunter",icon:"🔫",rarity:"rare",price:200,weight:20},
+      {name:"M4 Samurai",icon:"🔫",rarity:"epic",price:350,weight:15},
+      {name:"AWM Poseidon",icon:"🎯",rarity:"epic",price:550,weight:10},
+      {name:"Kukri Gold",icon:"🔪",rarity:"legendary",price:1200,weight:5}
     ]
   },
   {
@@ -36,12 +36,12 @@ const cases = [
     icon: "💎",
     price: 500,
     skins: [
-      {name:"UMP Cyber",icon:"🔫",rarity:"common",price:100,weight:20},
+      {name:"UMP45 Cyberpunk",icon:"🔫",rarity:"common",price:100,weight:20},
       {name:"AKR Dragon",icon:"🔫",rarity:"rare",price:250,weight:25},
-      {name:"M4 Samurai",icon:"🔫",rarity:"epic",price:500,weight:20},
-      {name:"AWM BOOM",icon:"🎯",rarity:"epic",price:700,weight:15},
-      {name:"Knife Butterfly",icon:"🔪",rarity:"legendary",price:1500,weight:12},
-      {name:"Gloves Gold",icon:"🥊",rarity:"legendary",price:2500,weight:8}
+      {name:"M4A1 Mermaid",icon:"🔫",rarity:"epic",price:500,weight:20},
+      {name:"AWM Nebula",icon:"🎯",rarity:"epic",price:700,weight:15},
+      {name:"Butterfly Glitch",icon:"🔪",rarity:"legendary",price:1500,weight:12},
+      {name:"Karambit Nebula",icon:"🔪",rarity:"legendary",price:2500,weight:8}
     ]
   }
 ];
