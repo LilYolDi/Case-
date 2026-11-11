@@ -1,82 +1,67 @@
 
 const $ = id => document.getElementById(id);
 
-// Реальные скины Standoff 2.
-// Изображения взяты из каталога Empire Collection.
+// Реальные изображения скинов Standoff 2
 const skins = {
   akrScale: {
     name: "AKR Scale",
     image: "https://esports.ru/wp-content/uploads/2026/01/akr-scale-photoroom.png",
-    rarity: "uncommon",
-    price: 120
+    rarity: "uncommon", price: 120
   },
   uspChameleon: {
     name: "USP Chameleon",
     image: "https://esports.ru/wp-content/uploads/2026/01/usp-chameleon-photoroom.png",
-    rarity: "legendary",
-    price: 600
+    rarity: "legendary", price: 600
   },
   awmBoom: {
     name: "AWM BOOM",
     image: "https://esports.ru/wp-content/uploads/2026/01/awm-boom-photoroom.png",
-    rarity: "arcane",
-    price: 1800
+    rarity: "arcane", price: 1800
   },
   p350Oni: {
     name: "P350 Oni",
     image: "https://esports.ru/wp-content/uploads/2026/01/p350-oni-photoroom.png",
-    rarity: "rare",
-    price: 180
+    rarity: "rare", price: 180
   },
   m4Demon: {
     name: "M4 Demon",
     image: "https://esports.ru/wp-content/uploads/2026/01/m4-demon-photoroom.png",
-    rarity: "rare",
-    price: 220
+    rarity: "rare", price: 220
   },
   m4a1Bubblegum: {
     name: "M4A1 Bubblegum",
     image: "https://esports.ru/wp-content/uploads/2026/01/m4a1-bubblegum-photoroom.png",
-    rarity: "arcane",
-    price: 2200
+    rarity: "arcane", price: 2200
   },
   deagleOrochi: {
     name: "Desert Eagle Orochi",
     image: "https://esports.ru/wp-content/uploads/2026/01/desert-eagle-orochi-photoroom.png",
-    rarity: "legendary",
-    price: 750
+    rarity: "legendary", price: 750
   },
   awmElevation: {
     name: "AWM Elevation",
     image: "https://esports.ru/wp-content/uploads/2026/01/awm-elevation-photoroom.png",
-    rarity: "uncommon",
-    price: 90
+    rarity: "uncommon", price: 90
   },
   m60SteamBeast: {
     name: "M60 Steam Beast",
     image: "https://esports.ru/wp-content/uploads/2026/01/m60-steam-beast-photoroom.png",
-    rarity: "epic",
-    price: 400
+    rarity: "epic", price: 400
   },
   famasAnger: {
     name: "FAMAS Anger",
     image: "https://esports.ru/wp-content/uploads/2026/01/famas-anger-photoroom.png",
-    rarity: "epic",
-    price: 350
+    rarity: "epic", price: 350
   },
   glovesBurningFists: {
     name: "Gloves Burning Fists",
     image: "https://esports.ru/wp-content/uploads/2026/01/gloves-burning-fists.png",
-    rarity: "arcane",
-    price: 2500
+    rarity: "arcane", price: 2500
   }
 };
 
 function makeSkin(id, weight) {
-  return {
-    ...skins[id],
-    weight
-  };
+  return { ...skins[id], weight };
 }
 
 const cases = [
@@ -167,30 +152,54 @@ function saveData() {
 }
 
 function updateBalance() {
-  $("balance").textContent =
-    balance.toLocaleString("ru-RU");
-
-  $("inventoryGold").textContent =
-    balance.toLocaleString("ru-RU");
-
+  $("balance").textContent = balance.toLocaleString("ru-RU");
+  $("inventoryGold").textContent = balance.toLocaleString("ru-RU");
   saveData();
 }
 
 function randomSkin(caseData) {
   const total = caseData.skins.reduce(
-    (sum, skin) => sum + skin.weight,
-    0
+    (sum, skin) => sum + skin.weight, 0
   );
 
   let random = Math.random() * total;
 
   for (const skin of caseData.skins) {
     random -= skin.weight;
-
     if (random <= 0) return { ...skin };
   }
 
   return { ...caseData.skins[0] };
+}
+
+// Разделяем название оружия и название скина
+function getSkinTitle(name) {
+  const prefixes = [
+    "Desert Eagle",
+    "Gloves",
+    "M4A1",
+    "AWM",
+    "AKR",
+    "USP",
+    "P350",
+    "M60",
+    "FAMAS"
+  ];
+
+  for (const prefix of prefixes) {
+    if (name.startsWith(prefix + " ")) {
+      return {
+        weapon: prefix,
+        skin: name.slice(prefix.length).trim()
+      };
+    }
+  }
+
+  const parts = name.split(" ");
+  return {
+    weapon: parts.shift() || name,
+    skin: parts.join(" ")
+  };
 }
 
 function skinImage(skin, className = "skin-image") {
@@ -204,36 +213,55 @@ function skinImage(skin, className = "skin-image") {
       src="${skin.image}"
       alt="${skin.name}"
       loading="lazy"
-      style="
-        width:100%;
-        height:105px;
-        object-fit:contain;
-        display:block;
-      "
-      onerror="this.style.display='none'"
+      onerror="this.outerHTML='<div class=\\'image-fallback\\'>${skin.name}</div>'"
     >
   `;
 }
 
+// Карточка скина в стиле примера
 function skinCard(skin) {
+  const title = getSkinTitle(skin.name);
+
   return `
     <div class="skin-card ${skin.rarity}">
-      ${skinImage(skin)}
-      <div class="skin-name">${skin.name}</div>
-      <div class="skin-rarity">
-        ${rarityNames[skin.rarity] || skin.rarity}
+      <div class="skin-price">${skin.price} G</div>
+
+      <div class="skin-art">
+        <div class="skin-neon"></div>
+        ${skinImage(skin)}
+      </div>
+
+      <div class="skin-card-info">
+        <div class="skin-weapon">${title.weapon}</div>
+        <div class="skin-card-bottom">
+          <span class="skin-name">${title.skin}</span>
+          <span class="rarity-triangles">▼▼▼</span>
+        </div>
       </div>
     </div>
   `;
 }
 
+// Карточки кейсов с изображениями их содержимого
 function renderCases() {
   $("casesGrid").innerHTML = cases.map(item => `
     <div class="case-card ${item.id === selectedCase.id ? "selected" : ""}"
          data-case="${item.id}">
-      <div class="case-icon">${item.icon}</div>
+
+      <div class="case-preview">
+        ${item.skins.slice(0, 3).map(skin => `
+          <div class="case-preview-item">
+            ${skinImage(skin)}
+          </div>
+        `).join("")}
+      </div>
+
       <h3>${item.name}</h3>
       <div class="case-price">🟡 ${item.price} GOLD</div>
+
+      <div class="case-skin-count">
+        ${item.skins.length} СКИНОВ ВНУТРИ
+      </div>
     </div>
   `).join("");
 
@@ -247,7 +275,6 @@ function renderCases() {
 
       renderCases();
       updateSelectedCase();
-
       $("result").textContent = "КЕЙС ВЫБРАН!";
     });
   });
@@ -257,7 +284,6 @@ function renderCases() {
 
 function updateSelectedCase() {
   $("selectedCaseName").textContent = selectedCase.name;
-
   $("selectedCasePrice").textContent =
     `Стоимость: ${selectedCase.price} Gold`;
 }
@@ -293,19 +319,15 @@ document.querySelectorAll(".nav-btn").forEach(button => {
 function createRoulette(winner) {
   const track = $("rouletteTrack");
   const winnerIndex = 40;
-
   const items = [];
 
   for (let i = 0; i < 50; i++) {
     items.push(
-      i === winnerIndex
-        ? winner
-        : randomSkin(selectedCase)
+      i === winnerIndex ? winner : randomSkin(selectedCase)
     );
   }
 
   track.innerHTML = items.map(skinCard).join("");
-
   track.style.transition = "none";
   track.style.transform = "translateX(0px)";
 
@@ -333,7 +355,6 @@ function openCase() {
 
   const track = $("rouletteTrack");
   const viewport = document.querySelector(".roulette-window");
-
   const winningCard = track.children[winnerIndex];
 
   $("result").textContent = "ИЩЕМ ТВОЙ СКИН...";
@@ -341,17 +362,14 @@ function openCase() {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       const cardCenter =
-        winningCard.offsetLeft +
-        winningCard.offsetWidth / 2;
+        winningCard.offsetLeft + winningCard.offsetWidth / 2;
 
-      const target =
-        cardCenter - viewport.clientWidth / 2;
+      const target = cardCenter - viewport.clientWidth / 2;
 
       track.style.transition =
         "transform 6.5s cubic-bezier(0.10, 0.70, 0.10, 1)";
 
-      track.style.transform =
-        `translateX(-${target}px)`;
+      track.style.transform = `translateX(-${target}px)`;
     });
   });
 
@@ -373,10 +391,7 @@ function openCase() {
     inventory.unshift(item);
 
     history.unshift({
-      name: winner.name,
-      image: winner.image,
-      icon: winner.icon,
-      rarity: winner.rarity,
+      ...winner,
       caseName: selectedCase.name,
       date: item.date
     });
@@ -384,7 +399,7 @@ function openCase() {
     history = history.slice(0, 50);
 
     $("result").innerHTML =
-      `ТВОЙ ВЫИГРЫШ: ${winner.name}<br>` +
+      `ТВОЙ ВЫИГРЫШ: ${skinImage(winner, "result-image")} ${winner.name}<br>` +
       `<span>${rarityNames[winner.rarity]} · ${winner.price} GOLD</span>`;
 
     $("openButton").disabled = false;
@@ -416,10 +431,14 @@ function renderInventory() {
 
   grid.innerHTML = inventory.map(item => `
     <div class="inventory-item ${item.rarity}">
-      ${skinImage(item)}
+      <div class="inventory-skin-art">
+        ${skinImage(item)}
+      </div>
+
       <h3>${item.name}</h3>
       <p>${rarityNames[item.rarity] || item.rarity}</p>
       <p>Цена продажи: ${item.price} Gold</p>
+
       <button class="sell-button" data-id="${item.id}">
         ПРОДАТЬ
       </button>
@@ -460,7 +479,7 @@ function renderHistory() {
 
   list.innerHTML = history.map(item => `
     <div class="history-item">
-      <div style="display:flex;align-items:center;gap:12px;">
+      <div class="history-skin">
         ${skinImage(item)}
         <div>
           <strong>${item.name}</strong>
