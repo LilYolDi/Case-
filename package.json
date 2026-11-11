@@ -1,0 +1,13 @@
+
+{
+  "name": "standoff-2-cases",
+  "version": "1.0.0",
+  "description": "Standoff 2 Cases",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
