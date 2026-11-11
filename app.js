@@ -64,6 +64,7 @@ function makeSkin(id, weight) {
   return { ...skins[id], weight };
 }
 
+// ВСЕ КЕЙСЫ
 const cases = [
   {
     id: "starter",
@@ -105,6 +106,78 @@ const cases = [
       makeSkin("uspChameleon", 15),
       makeSkin("m4a1Bubblegum", 15),
       makeSkin("glovesBurningFists", 10)
+    ]
+  },
+
+  // DIAMOND CASE — 1 000 GOLD
+  {
+    id: "diamond",
+    name: "DIAMOND CASE",
+    icon: "💠",
+    price: 1000,
+    skins: [
+      makeSkin("awmElevation", 30),
+      makeSkin("akrScale", 25),
+      makeSkin("p350Oni", 20),
+      makeSkin("m4Demon", 15),
+      makeSkin("famasAnger", 7),
+      makeSkin("uspChameleon", 2.5),
+      makeSkin("awmBoom", 0.5)
+    ]
+  },
+
+  // MYTHIC CASE — 2 500 GOLD
+  {
+    id: "mythic",
+    name: "MYTHIC CASE",
+    icon: "🔮",
+    price: 2500,
+    skins: [
+      makeSkin("akrScale", 25),
+      makeSkin("p350Oni", 20),
+      makeSkin("m4Demon", 18),
+      makeSkin("m60SteamBeast", 15),
+      makeSkin("uspChameleon", 12),
+      makeSkin("deagleOrochi", 8),
+      makeSkin("awmBoom", 1.5),
+      makeSkin("m4a1Bubblegum", 0.5)
+    ]
+  },
+
+  // LEGENDARY CASE — 5 000 GOLD
+  {
+    id: "legendary",
+    name: "LEGENDARY CASE",
+    icon: "👑",
+    price: 5000,
+    skins: [
+      makeSkin("p350Oni", 20),
+      makeSkin("m4Demon", 18),
+      makeSkin("m60SteamBeast", 16),
+      makeSkin("famasAnger", 15),
+      makeSkin("uspChameleon", 12),
+      makeSkin("deagleOrochi", 10),
+      makeSkin("awmBoom", 5),
+      makeSkin("m4a1Bubblegum", 2),
+      makeSkin("glovesBurningFists", 2)
+    ]
+  },
+
+  // DRAGON CASE — 10 000 GOLD
+  {
+    id: "dragon",
+    name: "DRAGON CASE",
+    icon: "🐉",
+    price: 10000,
+    skins: [
+      makeSkin("m4Demon", 20),
+      makeSkin("famasAnger", 18),
+      makeSkin("m60SteamBeast", 16),
+      makeSkin("uspChameleon", 14),
+      makeSkin("deagleOrochi", 12),
+      makeSkin("awmBoom", 8),
+      makeSkin("m4a1Bubblegum", 6),
+      makeSkin("glovesBurningFists", 6)
     ]
   }
 ];
@@ -172,7 +245,6 @@ function randomSkin(caseData) {
   return { ...caseData.skins[0] };
 }
 
-// Разделяем название оружия и название скина
 function getSkinTitle(name) {
   const prefixes = [
     "Desert Eagle",
@@ -218,7 +290,6 @@ function skinImage(skin, className = "skin-image") {
   `;
 }
 
-// Карточка скина в стиле примера
 function skinCard(skin) {
   const title = getSkinTitle(skin.name);
 
@@ -242,11 +313,13 @@ function skinCard(skin) {
   `;
 }
 
-// Карточки кейсов с изображениями их содержимого
+// Карточки всех семи кейсов
 function renderCases() {
   $("casesGrid").innerHTML = cases.map(item => `
-    <div class="case-card ${item.id === selectedCase.id ? "selected" : ""}"
+    <div class="case-card ${item.id === selectedCase.id ? "selected" : ""} ${item.price >= 1000 ? "expensive-case" : ""}"
          data-case="${item.id}">
+
+      <div class="case-icon">${item.icon}</div>
 
       <div class="case-preview">
         ${item.skins.slice(0, 3).map(skin => `
@@ -257,7 +330,7 @@ function renderCases() {
       </div>
 
       <h3>${item.name}</h3>
-      <div class="case-price">🟡 ${item.price} GOLD</div>
+      <div class="case-price">🟡 ${item.price.toLocaleString("ru-RU")} GOLD</div>
 
       <div class="case-skin-count">
         ${item.skins.length} СКИНОВ ВНУТРИ
@@ -285,9 +358,10 @@ function renderCases() {
 function updateSelectedCase() {
   $("selectedCaseName").textContent = selectedCase.name;
   $("selectedCasePrice").textContent =
-    `Стоимость: ${selectedCase.price} Gold`;
+    `Стоимость: ${selectedCase.price.toLocaleString("ru-RU")} Gold`;
 }
 
+// Навигация
 document.querySelectorAll(".nav-btn").forEach(button => {
   button.addEventListener("click", () => {
     if (spinning) return;
@@ -316,6 +390,7 @@ document.querySelectorAll(".nav-btn").forEach(button => {
   });
 });
 
+// Рулетка
 function createRoulette(winner) {
   const track = $("rouletteTrack");
   const winnerIndex = 40;
@@ -334,6 +409,7 @@ function createRoulette(winner) {
   return winnerIndex;
 }
 
+// Открытие кейса
 function openCase() {
   if (spinning) return;
 
@@ -420,6 +496,7 @@ function openCase() {
 
 $("openButton").addEventListener("click", openCase);
 
+// Инвентарь
 function renderInventory() {
   const grid = $("inventoryGrid");
 
@@ -452,6 +529,7 @@ function renderInventory() {
   });
 }
 
+// Продажа скинов
 function sellSkin(id) {
   const index = inventory.findIndex(
     item => String(item.id) === String(id)
@@ -468,6 +546,7 @@ function sellSkin(id) {
   renderInventory();
 }
 
+// История
 function renderHistory() {
   const list = $("historyList");
 
@@ -492,6 +571,7 @@ function renderHistory() {
   `).join("");
 }
 
+// Запуск
 updateBalance();
 renderCases();
 renderInventory();
